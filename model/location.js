@@ -1,42 +1,33 @@
-const pg = require('pg-promise')({/* OPTIONAL Initialization Options */});
+const db = require('../lib/dbconnect');
 
-const config = {
-  host:       process.env.DB_HOST,
-  port:       process.env.DB_PORT,
-  database:   process.env.DB_NAME,
-  user:       process.env.DB_USER,
-  password:   process.env.DB_PASS,
-};
+function getAllLocations(req, res, next) {
 
-const db = pg(config);
+  db.any('SELECT * FROM locations;')
+    .then((data) => {
+      res.data = data;
+      next();
+    })
+    .catch(error => next(error));
+}
+
+// function getFiltered(req, res, next) {
+//   db.any('SELECT * FROM location WHERE appName=$1, host=$2;', [req.body.appName, req.body.host])
+//       .then((data) => {
+//       res.rows = data;
+//       next();
+//     })
+//     .catch(error => next(error));
+// }
+
+//  function getFilteredDecs(req, res, next) {
+//   db.any('SELECT * FROM location WHERE appName=$1, host=$2 ORDER BY locTime DECS;', [req.body.appName, req.body.host])
+//       .then((data) => {
+//       res.rows = data;
+//       next();
+//     })
+//     .catch(error => next(error));
+// }
 
 module.exports = {
-
-  getAllLocations(req, res, next) {
-    db.any('SELECT * FROM location')
-        .then((data) => {
-        res.rows = data;
-        next();
-      })
-      .catch(error => next(error));
-  },
-
-  getFiltered(req, res, next) {
-    db.any('SELECT * FROM location WHERE appName=$1, host=$2', [req.body.appName, req.body.host])
-        .then((data) => {
-        res.rows = data;
-        next();
-      })
-      .catch(error => next(error));
-  },
-
-    getFilteredDecs(req, res, next) {
-    db.any('SELECT * FROM location WHERE appName=$1, host=$2 ORDER BY locTime DECS', [req.body.appName, req.body.host])
-        .then((data) => {
-        res.rows = data;
-        next();
-      })
-      .catch(error => next(error));
-  }
-
+  getAllLocations
 }
