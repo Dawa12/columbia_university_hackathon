@@ -15,6 +15,6 @@ app.set('views', 'views');
 
 app.use('/', mainRoute);
 app.use('/maps', mapRoute);
-app.use('/show/location', locRoute)
+app.use('/show/testing', locRoute)
 
 app.listen(PORT, () => console.log('Welcome to DTL2016 Hackathon on port:', PORT));

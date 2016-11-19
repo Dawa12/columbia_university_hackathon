@@ -11,8 +11,8 @@ const config = {
 const db = pg(config);
 
 module.exports = {
-
   getAllLocations(req, res, next) {
+  console.log('reaches get all locations');
     db.any('SELECT * FROM location')
         .then((data) => {
         res.rows = data;
