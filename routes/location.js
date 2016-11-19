@@ -1,8 +1,10 @@
-const location = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const { getAllLocations } = require('../model/location');
 
-location.get('/', getAllLocations, (req, res) => {
-  console.log('This worked');
+
+router.get('/', getAllLocations, (req, res) => {
+  res.json(res.puppies);
 });
 
-module.exports = location;
+module.exports = router;
