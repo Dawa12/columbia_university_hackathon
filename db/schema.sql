@@ -29,9 +29,9 @@
 
 BEGIN;
 
-DROP TABLE IF EXISTS locations;
+DROP TABLE IF EXISTS location;
 
-CREATE TABLE locations (
+CREATE TABLE location (
   id SERIAL PRIMARY KEY,
   appName VARCHAR NOT NULL,
   host TEXT NOT NULL,
