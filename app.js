@@ -4,7 +4,8 @@ const logger = require('morgan');
 const path = require('path');
 const mainRoute = require('./routes/main.js');
 const mapRoute = require('./routes/map.js');
-const locRoute = require('./routes/location.js')
+const locRoute = require('./routes/location.js');
+const reconRoute = require('./routes/recon.js');
 
 const PORT = process.env.PORT || 3000
 const app = express();
@@ -19,7 +20,7 @@ app.set('views', 'views');
 
 app.use('/', mainRoute);
 app.use('/maps', mapRoute);
-// app.use('/show/testing', locRoute)
+app.use('/recon', reconRoute);
 app.use('/show/location', locRoute);
 
 app.listen(PORT, () => console.log('Welcome to the DTL2016 Hackathon on port:', PORT));
